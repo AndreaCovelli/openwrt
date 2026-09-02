@@ -25,10 +25,13 @@ warnings and firmware messages.
 
 ## Compatibility
 
-The patch was generated against pristine OpenWrt `backports-6.18.26`. Use it as
-a standalone replacement for the AP-side FT deferred-key patch: remove
-`400-mac80211-defer-ap-side-ft-key-upload.patch`, then place this test patch in
-the same patch slot. Keep one patch 400 variant in the build at a time.
+The patch was generated and dry-run checked against pristine OpenWrt
+`backports-7.2` (SHA-256
+`6ec76a4cb0988b5382b2fc5053610a56ada90b8ef6a5a4f2807cd433badb9454`).
+Use it as a standalone replacement for the AP-side FT deferred-key patch:
+remove `400-mac80211-defer-ap-side-ft-key-upload.patch` if present, then place
+this test patch in the same patch slot. Keep one patch 400 variant in the
+build at a time.
 
 ## Add it to an OpenWrt build
 
@@ -56,9 +59,9 @@ revision. Follow kernel messages while repeating FT roams in both directions:
 logread -f | grep -E 'mac80211 FT key test|key addition failed|failed to install key|firmware'
 ```
 
-Exercise data traffic immediately after every roam. Repeat enough times to
-trigger the original pre-ASSOC race. Tagged lines appear when a roam enters
-the pre-ASSOC key-install window.
+Exercise bidirectional data traffic immediately after every roam. Repeat
+enough times to trigger the original pre-ASSOC race. Tagged lines appear when
+a roam enters the pre-ASSOC key-install window.
 
 Interpret the tagged result as follows:
 
